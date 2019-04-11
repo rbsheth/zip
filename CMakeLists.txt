@@ -22,7 +22,9 @@ endif (MSVC)
 set(SRC src/miniz.h src/zip.h src/zip.c)
 add_library(${PROJECT_NAME} ${SRC})
 target_include_directories(${PROJECT_NAME} PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+  $<INSTALL_INTERFACE:include>
+)
 
 # test
 if (NOT CMAKE_DISABLE_TESTING)
@@ -83,7 +85,7 @@ install(TARGETS ${PROJECT_NAME}
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
         INCLUDES DESTINATION ${include_install_dir}
-        COMPONENT library)
+)
 install(FILES ${PROJECT_SOURCE_DIR}/src/zip.h DESTINATION ${include_install_dir}/zip)
 
 # uninstall target (https://gitlab.kitware.com/cmake/community/wikis/FAQ#can-i-do-make-uninstall-with-cmake)
